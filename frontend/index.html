@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cuyahoga Terravita</title>
   <!-- Link to our compiled stylesheet -->
-  <link rel="stylesheet" href="/styles.css/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="content-area">
@@ -161,51 +161,37 @@
             <div class="weather-header">
               <div class="weather-location" id="weather-location">Peninsula, Ohio</div>
             </div>
-            <div class="weather-date" id="weather-date"><span id="current-date" class="meta-date"></span></div>
-            <div class="weather-temp" id="weather-temp"><span id="current-temp" class="meta-temp"></span></div>
-            <ul class="weather-meta">
-              <li><span>Feels like:</span><ul id="weather-feels" class="feels" data-slot=""><li>Loading...</li></ul></span></li>
-              <li><span>Humidity:</span><ul id="weather-humidity" class="humidity" data-slot=""><li>Loading...</li></ul></span></li>
-              <li><span>Precipitation:</span><ul id="weather-precipitation" class="precipitation" data-slot=""><li>Loading...</li></ul></span></li>
-              <li><span>Sunrise:</span><ul id="weather-sunrise" class="sunrise" data-slot=""><li>Loading...</li></ul></span></li>
-              <li><span>Sunset:</span><ul id="weather-sunset" class="sunset" data-slot=""><li>Loading...</li></ul></span></li>
-              <li><span>Wind:</span><ul id="weather-wind" class="wind" data-slot=""><li>Loading...</li></ul></span></li>
-              <li><span>Pressure:</span><ul id="weather-pressure" class="pressure" data-slot=""><li>Loading...</li></ul></span></li>
-              <li><span>UV:</span><ul id="weather-uv" class="uv" data-slot=""><li>Loading...</li></ul></span></li>
-            </ul>
-          </div>
-          
-          <div class="weather-right">
-            <!-- Right side top: hourly weather -->
-            <div class="weather-left-top">
-              <div class="weather-hourly">
-              <div class="hour"><span> Now </span><span class="icon">
-                <img src="/assets/web-this-weeks-haul.png">
-              </span><span id="now-weather"></span></div>
-              <div class="hour"><span>11:00</span><span class="icon">
-              
-              </span id="11-weather"><span</span></div>
-              <div class="hour"><span>12:00</span><span class="icon">
-              
-              </span id="now-weather"></span></div>
-              <div class="hour"><span>01:00</span><span class="icon">
-              
-              </span id="now-weather"></span></div>
-              <div class="hour"><span>02:00</span><span class="icon">
-              
-              </span id="now-weather"></span></div>
-              <div class="hour"><span>03:00</span><span class="icon">
-              
-              </span id="now-weather"></span></div>
-              <div class="hour"><span>04:00</span><span class="icon">
-              
-              </span id="now-weather"></span></div>
+          <div class="weather-date" id="weather-date"><span id="current-date" class="meta-date"></span></div>
+          <div class="weather-temp" id="weather-temp"><span id="current-temp" class="meta-temp"></span></div>
+          <ul class="weather-meta">
+            <li><span>Feels like:</span><ul id="weather-feels" class="feels"><li>Loading...</li></ul></li>
+            <li><span>Humidity:</span><ul id="weather-humidity" class="humidity"><li>Loading...</li></ul></li>
+            <li><span>Precipitation:</span><ul id="weather-precipitation" class="precipitation"><li>Loading...</li></ul></li>
+            <li><span>Sunrise:</span><ul id="weather-sunrise" class="sunrise"><li>Loading...</li></ul></li>
+            <li><span>Sunset:</span><ul id="weather-sunset" class="sunset"><li>Loading...</li></ul></li>
+            <li><span>Wind:</span><ul id="weather-wind" class="wind"><li>Loading...</li></ul></li>
+            <li><span>Pressure:</span><ul id="weather-pressure" class="pressure"><li>Loading...</li></ul></li>
+            <li><span>UV:</span><ul id="weather-uv" class="uv"><li>Loading...</li></ul></li>
+          </ul>
+        </div>
+
+        <div class="weather-right">
+          <!-- Right side top: hourly weather -->
+          <div class="weather-left-top">
+            <div class="weather-hourly">
+              <div class="hour"><span>Now</span><span class="icon"><img src="/assets/web-this-weeks-haul.png" alt="Weather icon"></span><span class="hourly-temp">--</span></div>
+              <div class="hour"><span>11:00</span><span class="icon"></span><span class="hourly-temp">--</span></div>
+              <div class="hour"><span>12:00</span><span class="icon"></span><span class="hourly-temp">--</span></div>
+              <div class="hour"><span>01:00</span><span class="icon"></span><span class="hourly-temp">--</span></div>
+              <div class="hour"><span>02:00</span><span class="icon"></span><span class="hourly-temp">--</span></div>
+              <div class="hour"><span>03:00</span><span class="icon"></span><span class="hourly-temp">--</span></div>
+              <div class="hour"><span>04:00</span><span class="icon"></span><span class="hourly-temp">--</span></div>
               </div>
             </div>
-            
+
             <!-- Right side bottom: query API content -->
             <div class="weather-left-bottom">
-              <form class="weather-query" onsubmit="HERE">
+              <form class="weather-query" onsubmit="return false;">
                 <input type="text" class="query-input">
                 <button type="submit" class="search-button">
                   <img src="/assets/icon-search.png" alt="Query">
@@ -263,7 +249,7 @@
   replaced by calls to a real weather service.  For accessibility, the 
   script executes after the document is loaded.
   -->
-  <script src="/script.js"></script>
+  <script src="script.js"></script>
   
 </body>
 
