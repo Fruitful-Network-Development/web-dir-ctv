@@ -59,7 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const pressureEl = document.getElementById('weather-pressure');
   const uvEl = document.getElementById('weather-uv');
 
-  const WEATHER_COORDS = { lat: 41.241, lon: -81.548 }; // Cuyahoga Valley, OH
+  const DEFAULT_COORDS = { lat: 41.241, lon: -81.548, name: 'Cuyahoga Valley' };
+  let currentCoords = { ...DEFAULT_COORDS };
 
   const formatDate = (isoDate) => {
     if (!isoDate) return '—';
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (el) el.textContent = value;
   };
 
-  const updateWeatherDisplay = (payload) => {
+  const updateWeatherDisplay = (payload, overrideLabel) => {
     if (!payload || !payload.daily) return;
 
     const daily = payload.daily;
@@ -106,7 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
       precipitation: daily.precipitation_sum?.[0],
     };
 
-    setText(locationEl, payload.timezone?.replace(/_/g, ' ') || 'Local forecast');
+    setText(
+      locationEl,
+      overrideLabel || payload.timezone?.replace(/_/g, ' ') || 'Local forecast'
+    );
     setText(dateEl, formatDate(firstDay.date));
     setText(tempEl, firstDay.tempMax != null ? `${Math.round(firstDay.tempMax)}°` : '—');
     setText(feelsEl, firstDay.apparentMax != null ? `${Math.round(firstDay.apparentMax)}°` : '—');
@@ -124,20 +128,102 @@ document.addEventListener('DOMContentLoaded', function() {
     setText(uvEl, firstDay.uvIndex != null ? `${firstDay.uvIndex} UV` : '—');
   };
 
-  const fetchWeather = () => {
-    const url = `/api/weather/daily?lat=${WEATHER_COORDS.lat}&lon=${WEATHER_COORDS.lon}&days=1`;
+  const fetchWeather = (coords = currentCoords, label = coords.name) => {
+    const url = `/api/weather/daily?lat=${coords.lat}&lon=${coords.lon}&days=1`;
+
+    setText(locationEl, label || 'Loading forecast…');
 
     fetch(url)
       .then((resp) => {
         if (!resp.ok) throw new Error(`Weather API error: ${resp.status}`);
         return resp.json();
       })
-      .then((data) => updateWeatherDisplay(data))
+      .then((data) => updateWeatherDisplay(data, label))
       .catch((err) => {
         console.error(err);
         setText(locationEl, 'Weather unavailable');
       });
   };
+
+  const queryForm = document.querySelector('.weather-query');
+  const queryInput = document.querySelector('.query-input');
+  let queryFeedback;
+
+  const getOrCreateFeedback = () => {
+    if (queryFeedback) return queryFeedback;
+    queryFeedback = document.createElement('div');
+    queryFeedback.className = 'query-feedback';
+    queryFeedback.setAttribute('role', 'status');
+    queryFeedback.setAttribute('aria-live', 'polite');
+    queryFeedback.style.marginTop = '0.25rem';
+    queryFeedback.style.fontSize = '0.9rem';
+    queryFeedback.style.color = '#f0f0f0';
+    queryForm?.appendChild(queryFeedback);
+    return queryFeedback;
+  };
+
+  const showFeedback = (message, isError = false) => {
+    const feedbackEl = getOrCreateFeedback();
+    feedbackEl.textContent = message;
+    feedbackEl.style.color = isError ? '#ffb4a2' : '#f0f0f0';
+  };
+
+  const FALLBACK_LOCATIONS = {
+    peninsula: { lat: 41.241, lon: -81.548, name: 'Peninsula, OH' },
+    akron: { lat: 41.0814, lon: -81.519, name: 'Akron, OH' },
+    cleveland: { lat: 41.4993, lon: -81.6944, name: 'Cleveland, OH' },
+    cuyahoga: { lat: 41.2806, lon: -81.5678, name: 'Cuyahoga Valley National Park' },
+  };
+
+  const resolveQueryToCoords = (query) => {
+    const trimmed = query.trim();
+    if (!trimmed) {
+      return Promise.reject(new Error('Please enter a location.'));
+    }
+
+    const normalized = trimmed.toLowerCase();
+    if (FALLBACK_LOCATIONS[normalized]) {
+      return Promise.resolve(FALLBACK_LOCATIONS[normalized]);
+    }
+
+    const geocodeUrl = `/api/geocode?query=${encodeURIComponent(trimmed)}`;
+
+    return fetch(geocodeUrl)
+      .then((resp) => {
+        if (!resp.ok) throw new Error('Unable to reach geocoding service.');
+        return resp.json();
+      })
+      .then((data) => {
+        const result = data?.results?.[0];
+        if (!result?.latitude || !result?.longitude) {
+          throw new Error('Location not found. Try a nearby city.');
+        }
+        return {
+          lat: result.latitude,
+          lon: result.longitude,
+          name: result.name || trimmed,
+        };
+      });
+  };
+
+  queryForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const queryValue = queryInput?.value || '';
+
+    showFeedback('Looking up location…');
+
+    resolveQueryToCoords(queryValue)
+      .then((coords) => {
+        currentCoords = { ...coords };
+        showFeedback(`Showing weather for ${coords.name || queryValue}.`);
+        fetchWeather(currentCoords, coords.name || queryValue);
+      })
+      .catch((err) => {
+        console.error(err);
+        showFeedback(err.message || 'Unable to find that location.', true);
+        queryInput?.focus();
+      });
+  });
 
   fetchWeather();
 
