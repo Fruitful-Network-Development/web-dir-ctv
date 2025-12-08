@@ -1,1 +1,160 @@
-{}
+{ "csa_hauls": [
+  {"time_stamp": "2017_05_08",
+    "title": "csa_haul_2017_1",
+    "alias": "2017 CSA Week 1",
+    "picture": "assets/imgs/csa/csa_haul_2017_1.jpeg",
+    "batches": [
+      {}
+      ]
+  },
+  {"time_stamp": "2017_05_15",
+    "title": "csa_haul_2017_2",
+    "alias": "2017 CSA Week 2",
+    "picture": "assets/imgs/csa/csa_haul_2017_2.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_05_22",
+    "title": "csa_haul_2017_3",
+    "alias": "2017 CSA Week 3",
+    "picture": "assets/imgs/csa/csa_haul_2017_3.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_05_29",
+    "title": "csa_haul_2017_4",
+    "alias": "2017 CSA Week 4",
+    "picture": "assets/imgs/csa/csa_haul_2017_4.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_06_",
+    "title": "csa_haul_2017_5",
+    "alias": "2017 CSA Week 5",
+    "picture": "assets/imgs/csa/csa_haul_2017_5.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_06_05",
+    "title": "csa_haul_2017_6",
+    "alias": "2017 CSA Week 6",
+    "picture": "assets/imgs/csa/csa_haul_2017_6.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_06_12",
+    "title": "csa_haul_2017_7",
+    "alias": "2017 CSA Week 7",
+    "picture": "assets/imgs/csa/csa_haul_2017_7.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_06_19",
+    "title": "csa_haul_2017_8",
+    "alias": "2017 CSA Week 8",
+    "picture": "assets/imgs/csa/csa_haul_2017_8.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_06_26",
+    "title": "csa_haul_2017_9",
+    "alias": "2017 CSA Week 9",
+    "picture": "assets/imgs/csa/csa_haul_2017_9.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_07_03",
+    "title": "csa_haul_2017_10",
+    "alias": "2017 CSA Week 10",
+    "picture": "assets/imgs/csa/csa_haul_2017_10.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_07_10",
+    "title": "csa_haul_2017_11",
+    "alias": "2017 CSA Week 11",
+    "picture": "assets/imgs/csa/csa_haul_2017_11.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_07_17",
+    "title": "csa_haul_2017_12",
+    "alias": "2017 CSA Week 12",
+    "picture": "assets/imgs/csa/csa_haul_2017_12.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_07_24",
+    "title": "csa_haul_2017_13",
+    "alias": "2017 CSA Week 13",
+    "picture": "assets/imgs/csa/csa_haul_2017_13.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_07_31",
+    "title": "csa_haul_2017_14",
+    "alias": "2017 CSA Week 14",
+    "picture": "assets/imgs/csa/csa_haul_2017_14.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_08_07",
+    "title": "csa_haul_2017_15",
+    "alias": "2017 CSA Week 15",
+    "picture": "assets/imgs/csa/csa_haul_2017_15.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_08_14",
+    "title": "csa_haul_2017_16",
+    "alias": "2017 CSA Week 16",
+    "picture": "assets/imgs/csa/csa_haul_2017_16.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_08_21",
+    "title": "csa_haul_2017_17",
+    "alias": "2017 CSA Week 17",
+    "picture": "assets/imgs/csa/csa_haul_2017_17.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_08_28",
+    "title": "csa_haul_2017_18",
+    "alias": "2017 CSA Week 18",
+    "picture": "assets/imgs/csa/csa_haul_2017_18.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_09_04",
+    "title": "csa_haul_2017_19",
+    "alias": "2017 CSA Week 19",
+    "picture": "assets/imgs/csa/csa_haul_2017_19.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_09_11",
+    "title": "csa_haul_2017_20",
+    "alias": "2017 CSA Week 20",
+    "picture": "assets/imgs/csa/csa_haul_2017_20.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_09_18",
+    "title": "csa_haul_2017_21",
+    "alias": "2017 CSA Week 21",
+    "picture": "assets/imgs/csa/csa_haul_2017_21.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_09_25",
+    "title": "csa_haul_2017_22",
+    "alias": "2017 CSA Week 22",
+    "picture": "assets/imgs/csa/csa_haul_2017_22.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_10_02",
+    "title": "csa_haul_2017_23",
+    "alias": "2017 CSA Week 23",
+    "picture": "assets/imgs/csa/csa_haul_2017_23.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_10_09",
+    "title": "csa_haul_2017_24",
+    "alias": "2017 CSA Week 24",
+    "picture": "assets/imgs/csa/csa_haul_2017_24.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_10_16",
+    "title": "csa_haul_2017_25",
+    "alias": "2017 CSA Week 25",
+    "picture": "assets/imgs/csa/csa_haul_2017_25.jpeg",
+    "batches": [HERE]
+  },
+  {"time_stamp": "2017_10_23",
+    "title": "csa_haul_2017_26",
+    "alias": "2017 CSA Week 26",
+    "picture": "assets/imgs/csa/csa_haul_2017_26.jpeg",
+    "batches": [HERE]
+  },
+]}
