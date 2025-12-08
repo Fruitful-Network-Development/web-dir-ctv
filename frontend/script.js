@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const windEl = document.getElementById('weather-wind');
   const pressureEl = document.getElementById('weather-pressure');
   const uvEl = document.getElementById('weather-uv');
+  const hourlyContainer = document.querySelector('.weather-hourly');
 
   const DEFAULT_COORDS = { lat: 41.241, lon: -81.548, name: 'Cuyahoga Valley' };
   let currentCoords = { ...DEFAULT_COORDS };
@@ -87,6 +88,82 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const setText = (el, value) => {
     if (el) el.textContent = value;
+  };
+
+  const formatHourlyLabel = (isoDateTime, index) => {
+    if (!isoDateTime) return index === 0 ? 'Now' : '—';
+    const date = new Date(isoDateTime);
+    return index === 0
+      ? 'Now'
+      : date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+  };
+
+  const getHourlyIcon = (hourly, index) => {
+    if (!hourly) return null;
+    const directIcon = hourly.icon?.[index] || hourly.weather_icon?.[index];
+    if (directIcon) return directIcon;
+
+    const code = hourly.weathercode?.[index];
+    if (code != null) {
+      return `https://open-meteo.com/images/weather-icons/${code}.png`;
+    }
+
+    return null;
+  };
+
+  const renderHourly = (payload) => {
+    const hourly = payload?.hourly;
+    if (!hourly || !hourly.time || !hourlyContainer) return;
+
+    const temperatures =
+      hourly.temperature_2m || hourly.temperature || hourly.temperature_2m_mean || hourly.temperature_2m_max;
+    const entries = hourly.time
+      .map((time, index) => ({
+        time,
+        temperature: temperatures?.[index],
+        icon: getHourlyIcon(hourly, index),
+      }))
+      .filter((entry) => entry.time);
+
+    while (hourlyContainer.children.length > entries.length) {
+      hourlyContainer.removeChild(hourlyContainer.lastElementChild);
+    }
+
+    while (hourlyContainer.children.length < entries.length) {
+      const tile = document.createElement('div');
+      tile.className = 'hour';
+
+      const timeLabel = document.createElement('span');
+      const iconWrapper = document.createElement('span');
+      iconWrapper.className = 'icon';
+      const tempLabel = document.createElement('span');
+      tempLabel.className = 'hourly-temp';
+
+      tile.appendChild(timeLabel);
+      tile.appendChild(iconWrapper);
+      tile.appendChild(tempLabel);
+      hourlyContainer.appendChild(tile);
+    }
+
+    Array.from(hourlyContainer.children).forEach((tile, index) => {
+      const entry = entries[index];
+      if (!entry) return;
+
+      const [timeLabel, iconWrapper, tempLabel] = tile.children;
+
+      setText(timeLabel, formatHourlyLabel(entry.time, index));
+
+      iconWrapper.innerHTML = '';
+      const iconSrc = entry.icon;
+      if (iconSrc) {
+        const img = document.createElement('img');
+        img.src = iconSrc;
+        img.alt = 'Weather icon';
+        iconWrapper.appendChild(img);
+      }
+
+      setText(tempLabel, entry.temperature != null ? `${Math.round(entry.temperature)}°` : '—');
+    });
   };
 
   const updateWeatherDisplay = (payload, overrideLabel) => {
@@ -126,6 +203,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setText(windEl, formatWind(firstDay.windspeed, firstDay.windDirection));
     setText(pressureEl, '—');
     setText(uvEl, firstDay.uvIndex != null ? `${firstDay.uvIndex} UV` : '—');
+    
+    renderHourly(payload);
   };
 
   const fetchWeather = (coords = currentCoords, label = coords.name) => {
