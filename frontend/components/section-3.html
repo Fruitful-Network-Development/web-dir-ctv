@@ -1,0 +1,411 @@
+<div class="section3-root">
+  <style>
+    .section3-root {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      background: var(--section-bg, #2b402f);       /* color-1 fallback */
+      color: var(--section-accent, #303539);        /* color-3 fallback */
+      font-family: var(--section-font, "Times New Roman", Times, serif);
+      padding: var(--section-padding, 1rem);
+      overflow: hidden;
+      display: flex;
+    }
+
+    .section3-root .section-block.charcoal-set-in {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .section3-root .container {
+      width: min(1100px, 100% - 2rem);
+      margin: 0 auto;
+      height: 100%;
+    }
+
+    .section3-root .weather-container {
+      height: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.5fr);
+      gap: 1.25rem;
+    }
+
+    /* LEFT SIDE – CURRENT CONDITIONS */
+
+    .section3-root .weather-left {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 0.9rem;
+      padding: 0.9rem 1.1rem;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+
+    .section3-root .weather-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .section3-root .weather-location {
+      font-weight: 600;
+      font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+      letter-spacing: 0.04em;
+    }
+
+    .section3-root .weather-date {
+      font-size: clamp(0.7rem, 1vw, 0.9rem);
+      opacity: 0.8;
+      margin-bottom: 0.6rem;
+    }
+
+    .section3-root .weather-temp {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+    }
+
+    .section3-root .meta-date {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .section3-root .meta-temp {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .section3-root .weather-meta {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.3rem 0.75rem;
+      font-size: clamp(0.68rem, 0.9vw, 0.8rem);
+    }
+
+    .section3-root .weather-meta > li {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .section3-root .weather-meta > li > span {
+      opacity: 0.8;
+    }
+
+    .section3-root .weather-meta ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-weight: 600;
+    }
+
+    .section3-root .weather-meta li li {
+      display: inline;
+    }
+
+    /* RIGHT SIDE – HOURLY + QUERY */
+
+    .section3-root .weather-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      height: 100%;
+    }
+
+    .section3-root .weather-right-top {
+      flex: 1 1 auto;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 0.9rem;
+      padding: 0.75rem 0.9rem;
+      box-sizing: border-box;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section3-root .weather-hourly {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      gap: 0.4rem;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+    }
+
+    .section3-root .hour {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+      white-space: nowrap;
+    }
+
+    .section3-root .hour span:first-child {
+      opacity: 0.85;
+    }
+
+    .section3-root .icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .section3-root .icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .section3-root .hourly-temp {
+      font-weight: 600;
+    }
+
+    .section3-root .weather-right-bottom {
+      flex: 0 0 auto;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 0.9rem;
+      padding: 0.6rem 0.9rem;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+    }
+
+    .section3-root .weather-query {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .section3-root .query-input {
+      flex: 1 1 auto;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: transparent;
+      padding: 0.3rem 0.7rem;
+      color: #ffffff;
+      font: inherit;
+      outline: none;
+      min-width: 0;
+    }
+
+    .section3-root .query-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .section3-root .search-button {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--section-accent, #303539);
+      background: var(--section-accent, #303539);
+      color: var(--section-bg, #2b402f);
+      padding: 0.3rem 0.8rem;
+      font: inherit;
+      cursor: pointer;
+      font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .section3-root .search-button img {
+      max-height: 1.1em;
+      width: auto;
+    }
+
+    .section3-root .query-button-text {
+      white-space: nowrap;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .section3-root .weather-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1.1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .section3-root {
+        padding: 0.75rem;
+      }
+
+      .section3-root .weather-left {
+        padding: 0.75rem;
+      }
+
+      .section3-root .weather-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .section3-root .query-button-text {
+        display: none;
+      }
+    }
+  </style>
+
+  <section class="section-block charcoal-set-in">
+    <div class="weather-container container">
+      <!-- LEFT: CURRENT CONDITIONS -->
+      <div class="weather-left">
+        <div class="weather-header">
+          <div class="weather-location" id="weather-location">
+            Peninsula,&nbsp;Ohio
+          </div>
+        </div>
+
+        <div class="weather-date" id="weather-date">
+          <span id="current-date" class="meta-date">Loading date...</span>
+        </div>
+
+        <div class="weather-temp" id="weather-temp">
+          <span id="current-temp" class="meta-temp">--°</span>
+        </div>
+
+        <ul class="weather-meta">
+          <li>
+            <span>Feels like:</span>
+            <ul id="weather-feels" class="feels"><li>Loading...</li></ul>
+          </li>
+          <li>
+            <span>Humidity:</span>
+            <ul id="weather-humidity" class="humidity"><li>Loading...</li></ul>
+          </li>
+          <li>
+            <span>Precipitation:</span>
+            <ul id="weather-precipitation" class="precipitation"><li>Loading...</li></ul>
+          </li>
+          <li>
+            <span>Sunrise:</span>
+            <ul id="weather-sunrise" class="sunrise"><li>Loading...</li></ul>
+          </li>
+          <li>
+            <span>Sunset:</span>
+            <ul id="weather-sunset" class="sunset"><li>Loading...</li></ul>
+          </li>
+          <li>
+            <span>Wind:</span>
+            <ul id="weather-wind" class="wind"><li>Loading...</li></ul>
+          </li>
+          <li>
+            <span>Pressure:</span>
+            <ul id="weather-pressure" class="pressure"><li>Loading...</li></ul>
+          </li>
+          <li>
+            <span>UV:</span>
+            <ul id="weather-uv" class="uv"><li>Loading...</li></ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- RIGHT: HOURLY + QUERY -->
+      <div class="weather-right">
+        <div class="weather-right-top">
+          <div class="weather-hourly">
+            <div class="hour">
+              <span>Now</span>
+              <span class="icon">
+                <img src="../assets/imgs/web-this-weeks-haul.png" alt="Weather icon">
+              </span>
+              <span class="hourly-temp">--</span>
+            </div>
+            <div class="hour">
+              <span>11:00</span>
+              <span class="icon"></span>
+              <span class="hourly-temp">--</span>
+            </div>
+            <div class="hour">
+              <span>12:00</span>
+              <span class="icon"></span>
+              <span class="hourly-temp">--</span>
+            </div>
+            <div class="hour">
+              <span>01:00</span>
+              <span class="icon"></span>
+              <span class="hourly-temp">--</span>
+            </div>
+            <div class="hour">
+              <span>02:00</span>
+              <span class="icon"></span>
+              <span class="hourly-temp">--</span>
+            </div>
+            <div class="hour">
+              <span>03:00</span>
+              <span class="icon"></span>
+              <span class="hourly-temp">--</span>
+            </div>
+            <div class="hour">
+              <span>04:00</span>
+              <span class="icon"></span>
+              <span class="hourly-temp">--</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="weather-right-bottom">
+          <form class="weather-query" onsubmit="return false;">
+            <input
+              type="text"
+              class="query-input"
+              placeholder="Enter location or coordinates..."
+            >
+            <button type="submit" class="search-button">
+              <img src="../assets/icons/icon-search.png" alt="Query">
+              <span class="query-button-text">Query</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const root = document.currentScript.closest('.section3-root');
+      if (!root) return;
+
+      // --- Simple local date formatting (no API) ---
+      const dateSpan = root.querySelector('#current-date');
+      if (dateSpan) {
+        const now = new Date();
+        const options = { weekday: 'short', month: 'short', day: 'numeric' };
+        dateSpan.textContent = now.toLocaleDateString(undefined, options);
+      }
+
+      // Hook query form for future API integration
+      const form = root.querySelector('.weather-query');
+      const input = root.querySelector('.query-input');
+
+      if (form && input) {
+        form.addEventListener('submit', () => {
+          const query = input.value.trim();
+          if (!query) return;
+
+          console.log('Weather query:', query);
+
+          // This is where you can hook into your real weather module.
+          // For example, dispatch a custom event upward:
+          // root.dispatchEvent(new CustomEvent('weather-query', { detail: { query } }));
+        });
+      }
+    })();
+  </script>
+</div>
+
