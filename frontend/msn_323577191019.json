@@ -6,7 +6,8 @@
       "crop_rotation_groups.json",
       "local_domain.json",
       "product_type_crop.json",
-      "taxonomy_domain.json"
+      "taxonomy_domain.json",
+      "csa_hauls.json"
     ],
     "compendium": {
       "title": "Compendium",
