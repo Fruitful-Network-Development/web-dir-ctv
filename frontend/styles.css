@@ -102,20 +102,20 @@ img {
 
 /* Make the header much shorter than content sections */
 .page-header.section-block {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .header-main-row {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 16px 0;
+  padding: 8px 0;
 }
 
 /* Special case: the big circular brand mark image in the header row */
 .header-main-row > img.header-logo {
-  height: 110px;   /* adjust to taste */
+  height: 32px;   /* adjusted to reduce header height */
   width: auto;
   padding: 0;
   border-radius: 16px;
