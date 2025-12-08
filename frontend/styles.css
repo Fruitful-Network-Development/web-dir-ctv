@@ -137,6 +137,12 @@ img {
   transition: background 0.2s ease;
 }
 
+.header-icon img,
+.basket-icon img {
+  height: 32px;
+  width: auto;
+}
+
 .header-icon:hover,
 .basket-icon:hover,
 .header-logo:hover {
@@ -569,7 +575,7 @@ img {
 .site-footer {
   background: #0f1d15;
   color: #f5f5f5;
-  background-image: url('/assets/web-footer-img.png');
+  background-image: url('assets/imgs/web-footer-img.png');
   background-size: cover;
   background-position: center;
   margin-top: 40px;
