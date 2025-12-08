@@ -569,7 +569,7 @@ img {
 .site-footer {
   background: #0f1d15;
   color: #f5f5f5;
-  background-image: url('/assets/web-footer-img.png');
+  background-image: url('assets/imgs/web-footer-img.png');
   background-size: cover;
   background-position: center;
   margin-top: 40px;
