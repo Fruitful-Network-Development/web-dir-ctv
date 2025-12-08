@@ -113,15 +113,14 @@ Meaning:
 No restarts or rebuilds required.
 
 ## Guidance for Agents
-
 Before making changes in this repo, agents must understand:
-	1.	This repo is only for static frontend content.
-	2.	Backend behavior lives entirely in the shared Flask app repo.
-	3.	The manifest controls how this site integrates with the backend.
-	4.	Do not generate backend files (e.g., app.py) here.
-	5.	API calls should target /api/... endpoints—never local filesystem paths.
-	6.	Data files must be whitelisted in the manifest.
-	7.	If cross-origin access is required, request FLASK_ENABLE_CORS=1 on backend.
+    1.	This repo is only for static frontend content.
+    2.	Backend behavior lives entirely in the shared Flask app repo.
+    3.	The manifest controls how this site integrates with the backend.
+	   4.	Do not generate backend files (e.g., app.py) here.
+	   5.	API calls should target /api/... endpoints—never local filesystem paths.
+	   6.	Data files must be whitelisted in the manifest.
+	   7.	If cross-origin access is required, request FLASK_ENABLE_CORS=1 on backend.
 
 ## Summary
 
