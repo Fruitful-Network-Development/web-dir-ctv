@@ -1,72 +1,134 @@
 # web-dir-ctv
-Website for cuyahoga Tera Vita
+This repository contains the static website for cuyahogaterravita.com.
+It is served by NGINX directly from the server at:
+```html
+/srv/webapps/clients/cuyahogaterravita.com/frontend/
+```
+This repository includes:
+	•	HTML, CSS, JS (static assets only)
+	•	Images, icons, and supporting website media
+	•	The client manifest file: msn_<userId>.json
+	•	Optional data files under data/ used by the shared backend (CSV/JSON)
 
-## 1. aws-etc repository (system configs)
+This repo does not contain backend code. It works together with a shared Flask application hosted in a separate repository.
 
-### Current README context: The README already lays out the multi‑tenant architecture (Nginx reverse proxy, manifest-driven Flask backend, separate client directories) ￼.
+## How This Frontend Works With the Backend
 
-### Recommended additions (new “Agent Guidance” section):
-	•	Purpose of this repo: This repository contains only system‑level configuration (Nginx virtual hosts, systemd units, deployment scripts and audit logs). It is a sandbox for the server administrator; application code and client websites are stored elsewhere ￼.
-	•	No app or frontend code: Agents must not add or edit Flask modules or client website files in this repo. All application logic belongs in flask-app, and all client web assets belong in web-dir-fnd or web-dir-ctv.
-	•	How to change configs: Use the provided scripts under scripts/ to stage and deploy changes. Do not modify /etc directly. For example, updating Nginx config should follow the sync‑to‑aws and deploy scripts described in docs ￼.
-	•	Audit logs and prompt context: All audit scripts write into docs/ with timestamped files so agents can review outputs without touching /etc ￼.
-	•	Working with the manifest & multi‑tenant design:  Agents should never attempt to register blueprints or modules here.  The multi‑tenant server uses host‑based routing and a per‑client msn_<userId>.json manifest to control file access ￼.
+### 1. Served by NGINX
+	• NGINX serves this directory exactly as-is.
+	• There is no build step or server-side rendering.
 
----
+### 2. Per-client manifest (msn_<userId>.json)
 
-## 2. flask-app repository (shared backend)
+Each client domain has a manifest file that tells the backend:
+	•	which HTML file to serve (via default_entry)
+	•	which data files the backend may expose (via backend_data)
+	•	what assets belong to this client
+	•	any configuration values needed by the Flask app
 
-### Current README context: Explains that the Flask app serves multiple client frontends based on each client’s msn_<user>.json manifest ￼.
-
-### Recommended additions (new “Agent Guidance” section):
-	•	Single Flask application: This repo contains the only Flask application for all clients. Agents should never create a new app.py or a separate Flask app.  The existing app.py discovers client manifests and routes requests accordingly ￼.
-	•	Modules and blueprints: Reusable APIs (e.g. weather, donation box) live under platform/modules/ and are registered via blueprints ￼.  To add or modify a module, implement it under modules/ and import its blueprint in app.py, then register it with app.register_blueprint.  Do not copy modules into the client repositories or system repository.
-	•	CORS configuration: If a frontend is served from a different origin (for example when developing locally or hosting the frontend on a separate domain), set FLASK_ENABLE_CORS=1 in the environment.  This flag turns on CORS for the /api/* routes so that browsers can call the endpoints without errors.  Agents should not implement custom CORS logic or duplicate it in each module.
-	•	Manifest‑driven security: The data_access.py helper reads the client’s manifest to determine which data files can be exposed ￼.  Agents must update the manifest (msn_<userId>.json) rather than bypass this logic when adding new data files.
-	•	Adding new API endpoints: Follow the pattern used in existing modules (e.g. weather.py).  Each endpoint should:
-	1.	read necessary parameters from the request,
-	2.	validate the client ID or user ID,
-	3.	operate within the allowed data whitelist, and
-	4.	return JSON.  Register the endpoint via blueprint.
-	•	Don’t handle frontend here: This repo serves HTML only via app.py using the manifest’s default_entry.  Any HTML/CSS/JS belongs in the client repos.
-
----
-
-## 3. web-dir-fnd and web-dir-ctv (client websites)
-
-### Current READMEs: The FND README explains the Mycite profile concept ￼; CTV’s README has only one line.
-
-### Recommended additions for both repos (new “Agent Guidance” section):
-	•	Purpose of this repo: Each of these repositories hosts the static frontend for a single client domain (e.g. fruitfulnetworkdevelopment.com or cuyahogaterravita.com).  The contents are served by Nginx from /srv/webapps/clients/<domain>/frontend.
-	•	Manifest file: A file named msn_<userId>.json (e.g. msn_32357767435.json) must exist alongside index.html.  This manifest defines site configuration—including the default_entry HTML file and a backend_data whitelist—and is consumed by the Flask backend.  Agents should update the manifest rather than editing backend code when altering these settings.
-	•	Universal index.html: The entry file should include two <meta> tags:
-
+The frontend exposes this manifest via two meta-tags in index.html:
 ```html
 <meta name="msn-id" content="<userId>">
 <meta name="msn-config" content="msn_<userId>.json">
 ```
-These tags let the Flask backend map the host to the correct manifest
-
-	•	No backend logic here: Do not add Python code or attempt to call the file system; this repository is static.  All API calls should be made to /api/... endpoints exposed by the shared Flask app.
-	•	CORS & API access: If your frontend is served from a different origin (e.g. local development or a separate static site host), ask the server admin to set FLASK_ENABLE_CORS=1 on the Flask backend.  Do not implement your own CORS workaround in JavaScript; the backend will handle it.
-	•	Adding data files: When adding new JSON/CSV files under data/, update the backend_data list in the manifest so the backend will allow access.  Without whitelisting, requests to /api/data/<file> will be denied.
-
-### Additional notes for FND (web-dir-fnd):
-	•	Maintain the Mycite profile schema (Compendium, Oeuvre, Anthology) described in the existing README ￼.  Agents should expand the schema via the manifest rather than altering backend structures.
+These allow the backend to detect which site is being served and load the right frontend and data.
 
 ---
 
-### Additional notes for CTV (web-dir-ctv):
-	•	Provide similar guidance as above.  Consider adding a description of the site’s content (e.g. “CSA site for Cuyahoga Terra Vita”) and mention that its msn_<userId>.json manifest defines available crops, seasons, and program details.
+## 3. API Access (via Shared Flask Backend)
+The backend exposes APIs under:
+```html
+<meta name="msn-id" content="<userId>">
+<meta name="msn-config" content="msn_<userId>.json">
+```
 
----
+Examples:
+	•	/api/weather?location=...
+	•	/api/data/<file>
+	•	/api/inventory/... (if enabled)
+	•	/api/donations/... (if enabled)
+
+These APIs are provided by the global Flask backend, not this repo.
+
+## Important for Agents
+	•	Do not create backend files (app.py, modules, blueprints) in this repo.
+	•	The backend is located in: Fruitful-Network-Development/flask-app
+	•	To add new backend features, modify the appropriate module in that repo.
+
+## CORS & Cross-Origin Usage
+
+If the frontend is hosted separately (e.g., during local development), the backend may need CORS enabled.
+
+The backend supports this via an environment variable:
+```code
+FLASK_ENABLE_CORS=1
+```
+Agents should not attempt to implement CORS logic in frontend JavaScript.
+CORS configuration belongs in the backend only.
+
+## Adding or Updating Frontend Files
+Adding or Updating Frontend Files
+
+### You can modify:
+	•	index.html and other HTML files
+	•	script.js, modules, frontend logic
+	•	styles.css, UI components
+	•	images/icons under assets/
+	•	client-specific JSON under data/
+
+### If you add a new JSON file under data/, update:
+
+`msn_<userId>.json → backend_data array`
+
+Otherwise the backend will reject access to that file.
+
+### Example:
+```json
+"backend_data": [
+  "crop_rotation_groups.json",
+  "product_type_crop.json",
+  "new_file.json"
+]
+```
+Do NOT:
+	•	write backend Python code here
+	•	add Flask blueprints, modules, or app initialization
+	•	modify server configs (those belong in aws-etc)
+
+## Deployment Workflow
+
+Frontend updates are deployed to the live server using a pull script:
+```code
+~/GH-etc/scripts/pull_ctv.sh
+```
+This script performs a fast-forward-only pull inside:
+```code
+/srv/webapps/clients/cuyahogaterravita.com
+```
+Meaning:
+	•	you commit to GitHub →
+	•	server pulls updates →
+	•	site updates immediately (after browser cache clears)
+
+No restarts or rebuilds required.
+
+## Guidance for Agents
+
+Before making changes in this repo, agents must understand:
+	1.	This repo is only for static frontend content.
+	2.	Backend behavior lives entirely in the shared Flask app repo.
+	3.	The manifest controls how this site integrates with the backend.
+	4.	Do not generate backend files (e.g., app.py) here.
+	5.	API calls should target /api/... endpoints—never local filesystem paths.
+	6.	Data files must be whitelisted in the manifest.
+	7.	If cross-origin access is required, request FLASK_ENABLE_CORS=1 on backend.
 
 ## Summary
-where to run the pull scripts
-	•	The pull_fnd.sh and pull_ctv.sh scripts live in GH-etc/scripts/, but they operate on /srv/webapps/clients/<domain> and can be run from any directory.  Running them from ~/GH-etc keeps your workflow consistent; they will navigate to the correct repo based on REPO_PATH and perform a fast-forward pull.
 
+This repository defines:
+	•	the public-facing website for cuyahogaterravita.com
+	•	the manifest that tells the backend how to serve this site’s content
+	•	the data that certain backend modules may expose when whitelisted
 
-
-
-
+Agents modifying this repo should focus on UI/UX, layout, JS logic, and manifest updates, while keeping all backend changes strictly in the Flask application repository.
 
