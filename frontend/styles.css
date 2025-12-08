@@ -137,6 +137,12 @@ img {
   transition: background 0.2s ease;
 }
 
+.header-icon img,
+.basket-icon img {
+  height: 32px;
+  width: auto;
+}
+
 .header-icon:hover,
 .basket-icon:hover,
 .header-logo:hover {
