@@ -139,8 +139,7 @@ img {
 
 .header-icon img,
 .basket-icon img {
-  height: 32px;
-  width: auto;
+  height: 26px;
 }
 
 .header-icon:hover,
@@ -152,7 +151,6 @@ img {
 /* Logo inside the small right-hand button */
 .header-logo img {
   height: 46px;
-  width: auto;
 }
 
 .header-title-group {
