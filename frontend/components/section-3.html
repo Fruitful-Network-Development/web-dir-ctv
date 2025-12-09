@@ -4,8 +4,8 @@
       width: 100%;
       height: 100%;
       box-sizing: border-box;
-      background: var(--section-bg, #2b402f);       /* color-1 fallback */
-      color: var(--section-accent, #303539);        /* color-3 fallback */
+      background: var(--section-bg, #2b402f);
+      color: var(--section-accent, #303539);
       font-family: var(--section-font, "Times New Roman", Times, serif);
       padding: var(--section-padding, 1rem);
       overflow: hidden;
@@ -32,8 +32,6 @@
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.5fr);
       gap: 1.25rem;
     }
-
-    /* LEFT SIDE – CURRENT CONDITIONS */
 
     .section3-root .weather-left {
       background: rgba(0, 0, 0, 0.4);
@@ -111,8 +109,6 @@
       display: inline;
     }
 
-    /* RIGHT SIDE – HOURLY + QUERY */
-
     .section3-root .weather-right {
       display: flex;
       flex-direction: column;
@@ -129,49 +125,53 @@
       color: #ffffff;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
-    .section3-root .weather-hourly {
+    .section3-root .weather-daily {
       display: grid;
       grid-auto-flow: column;
       grid-auto-columns: minmax(0, 1fr);
-      gap: 0.4rem;
+      gap: 0.5rem;
       overflow-x: auto;
       padding-bottom: 0.2rem;
     }
 
-    .section3-root .hour {
+    .section3-root .day {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.2rem;
+      gap: 0.3rem;
       font-size: clamp(0.7rem, 0.9vw, 0.85rem);
       white-space: nowrap;
+      padding: 0.4rem;
+      border-radius: 0.5rem;
+      background: rgba(0, 0, 0, 0.2);
     }
 
-    .section3-root .hour span:first-child {
+    .section3-root .day-label {
       opacity: 0.85;
-    }
-
-    .section3-root .icon {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-    }
-
-    .section3-root .icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .section3-root .hourly-temp {
       font-weight: 600;
+    }
+
+    .section3-root .day-date {
+      opacity: 0.7;
+      font-size: 0.85em;
+    }
+
+    .section3-root .day-temp-max {
+      font-weight: 700;
+      font-size: 1.1em;
+    }
+
+    .section3-root .day-temp-min {
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
+
+    .section3-root .day-precip {
+      opacity: 0.8;
+      font-size: 0.85em;
     }
 
     .section3-root .weather-right-bottom {
@@ -181,7 +181,8 @@
       padding: 0.6rem 0.9rem;
       box-sizing: border-box;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      gap: 0.4rem;
     }
 
     .section3-root .weather-query {
@@ -233,7 +234,16 @@
       white-space: nowrap;
     }
 
-    /* RESPONSIVE */
+    .section3-root .query-feedback {
+      margin-top: 0.25rem;
+      font-size: 0.9rem;
+      color: #f0f0f0;
+      min-height: 1.2em;
+    }
+
+    .section3-root .query-feedback.error {
+      color: #ffb4a2;
+    }
 
     @media (max-width: 900px) {
       .section3-root .weather-container {
@@ -258,12 +268,19 @@
       .section3-root .query-button-text {
         display: none;
       }
+
+      .section3-root .weather-daily {
+        gap: 0.3rem;
+      }
+
+      .section3-root .day {
+        padding: 0.3rem;
+      }
     }
   </style>
 
   <section class="section-block charcoal-set-in">
     <div class="weather-container container">
-      <!-- LEFT: CURRENT CONDITIONS -->
       <div class="weather-left">
         <div class="weather-header">
           <div class="weather-location" id="weather-location">
@@ -315,47 +332,10 @@
         </ul>
       </div>
 
-      <!-- RIGHT: HOURLY + QUERY -->
       <div class="weather-right">
         <div class="weather-right-top">
-          <div class="weather-hourly">
-            <div class="hour">
-              <span>Now</span>
-              <span class="icon">
-                <img src="../assets/imgs/web-this-weeks-haul.png" alt="Weather icon">
-              </span>
-              <span class="hourly-temp">--</span>
-            </div>
-            <div class="hour">
-              <span>11:00</span>
-              <span class="icon"></span>
-              <span class="hourly-temp">--</span>
-            </div>
-            <div class="hour">
-              <span>12:00</span>
-              <span class="icon"></span>
-              <span class="hourly-temp">--</span>
-            </div>
-            <div class="hour">
-              <span>01:00</span>
-              <span class="icon"></span>
-              <span class="hourly-temp">--</span>
-            </div>
-            <div class="hour">
-              <span>02:00</span>
-              <span class="icon"></span>
-              <span class="hourly-temp">--</span>
-            </div>
-            <div class="hour">
-              <span>03:00</span>
-              <span class="icon"></span>
-              <span class="hourly-temp">--</span>
-            </div>
-            <div class="hour">
-              <span>04:00</span>
-              <span class="icon"></span>
-              <span class="hourly-temp">--</span>
-            </div>
+          <div class="weather-daily" id="weather-daily">
+            <!-- Daily forecast tiles will be inserted here -->
           </div>
         </div>
 
@@ -364,13 +344,15 @@
             <input
               type="text"
               class="query-input"
-              placeholder="Enter location or coordinates..."
+              id="query-input"
+              placeholder="Try: peninsula, akron, cleveland, cuyahoga"
             >
             <button type="submit" class="search-button">
               <img src="../assets/icons/icon-search.png" alt="Query">
               <span class="query-button-text">Query</span>
             </button>
           </form>
+          <div class="query-feedback" id="query-feedback" role="status" aria-live="polite"></div>
         </div>
       </div>
     </div>
@@ -381,31 +363,255 @@
       const root = document.currentScript.closest('.section3-root');
       if (!root) return;
 
-      // --- Simple local date formatting (no API) ---
-      const dateSpan = root.querySelector('#current-date');
-      if (dateSpan) {
-        const now = new Date();
-        const options = { weekday: 'short', month: 'short', day: 'numeric' };
-        dateSpan.textContent = now.toLocaleDateString(undefined, options);
-      }
+      const WEATHER_API = '/api/weather/daily';
 
-      // Hook query form for future API integration
-      const form = root.querySelector('.weather-query');
-      const input = root.querySelector('.query-input');
+      const FALLBACK_LOCATIONS = {
+        peninsula: { lat: 41.241, lon: -81.548, name: 'Peninsula, OH' },
+        akron: { lat: 41.0814, lon: -81.519, name: 'Akron, OH' },
+        cleveland: { lat: 41.4993, lon: -81.6944, name: 'Cleveland, OH' },
+        cuyahoga: { lat: 41.2806, lon: -81.5678, name: 'Cuyahoga Valley National Park' },
+      };
 
-      if (form && input) {
-        form.addEventListener('submit', () => {
-          const query = input.value.trim();
-          if (!query) return;
+      const DEFAULT_COORDS = { lat: 41.241, lon: -81.548, name: 'Cuyahoga Valley' };
+      let currentCoords = { ...DEFAULT_COORDS };
 
-          console.log('Weather query:', query);
+      const locationEl = root.querySelector('#weather-location');
+      const dateEl = root.querySelector('#weather-date');
+      const tempEl = root.querySelector('#weather-temp');
+      const feelsEl = root.querySelector('#weather-feels');
+      const humidityEl = root.querySelector('#weather-humidity');
+      const precipitationEl = root.querySelector('#weather-precipitation');
+      const sunriseEl = root.querySelector('#weather-sunrise');
+      const sunsetEl = root.querySelector('#weather-sunset');
+      const windEl = root.querySelector('#weather-wind');
+      const pressureEl = root.querySelector('#weather-pressure');
+      const uvEl = root.querySelector('#weather-uv');
+      const dailyContainer = root.querySelector('#weather-daily');
+      const queryForm = root.querySelector('.weather-query');
+      const queryInput = root.querySelector('#query-input');
+      const queryFeedback = root.querySelector('#query-feedback');
 
-          // This is where you can hook into your real weather module.
-          // For example, dispatch a custom event upward:
-          // root.dispatchEvent(new CustomEvent('weather-query', { detail: { query } }));
+      const setText = (el, value) => {
+        if (el) {
+          const listItem = el.querySelector('li');
+          if (listItem) {
+            listItem.textContent = value;
+          } else {
+            el.textContent = value;
+          }
+        }
+      };
+
+      const formatDate = (isoDate) => {
+        if (!isoDate) return '—';
+        const date = new Date(`${isoDate}T00:00:00`);
+        return date.toLocaleDateString(undefined, {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric',
+        });
+      };
+
+      const formatShortDate = (isoDate) => {
+        if (!isoDate) return '—';
+        const date = new Date(`${isoDate}T00:00:00`);
+        return date.toLocaleDateString(undefined, {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+        });
+      };
+
+      const formatTime = (isoDateTime) => {
+        if (!isoDateTime) return '—';
+        const date = new Date(isoDateTime);
+        return date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      };
+
+      const formatWind = (speed, direction) => {
+        if (speed == null) return '—';
+        const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+        const idx = Math.round(((direction ?? 0) % 360) / 45) % 8;
+        return `${Math.round(speed)} km/h ${dirs[idx]}`;
+      };
+
+      const showFeedback = (message, isError = false) => {
+        if (queryFeedback) {
+          queryFeedback.textContent = message;
+          queryFeedback.className = isError ? 'query-feedback error' : 'query-feedback';
+        }
+      };
+
+      const renderDaily = (payload) => {
+        const daily = payload?.daily;
+        if (!daily || !daily.time || !dailyContainer) return;
+
+        const times = daily.time || [];
+        const tempMax = daily.temperature_max || [];
+        const tempMin = daily.temperature_min || [];
+        const precip = daily.precipitation_sum || [];
+        const precipitationUnit = payload.unit_system?.precipitation_sum || 'mm';
+
+        dailyContainer.innerHTML = '';
+
+        const daysToShow = Math.min(7, times.length);
+        for (let i = 0; i < daysToShow; i++) {
+          const tile = document.createElement('div');
+          tile.className = 'day';
+
+          const label = document.createElement('div');
+          label.className = 'day-label';
+          if (i === 0) {
+            label.textContent = 'Today';
+          } else {
+            const date = new Date(`${times[i]}T00:00:00`);
+            label.textContent = date.toLocaleDateString(undefined, { weekday: 'short' });
+          }
+
+          const dateLabel = document.createElement('div');
+          dateLabel.className = 'day-date';
+          dateLabel.textContent = formatShortDate(times[i]);
+
+          const tempMaxEl = document.createElement('div');
+          tempMaxEl.className = 'day-temp-max';
+          tempMaxEl.textContent = tempMax[i] != null ? `${Math.round(tempMax[i])}°` : '—';
+
+          const tempMinEl = document.createElement('div');
+          tempMinEl.className = 'day-temp-min';
+          tempMinEl.textContent = tempMin[i] != null ? `${Math.round(tempMin[i])}°` : '—';
+
+          const precipEl = document.createElement('div');
+          precipEl.className = 'day-precip';
+          if (precip[i] != null && precip[i] > 0) {
+            precipEl.textContent = `${Math.round(precip[i] * 10) / 10}${precipitationUnit}`;
+          } else {
+            precipEl.textContent = '—';
+          }
+
+          tile.appendChild(label);
+          tile.appendChild(dateLabel);
+          tile.appendChild(tempMaxEl);
+          tile.appendChild(tempMinEl);
+          tile.appendChild(precipEl);
+          dailyContainer.appendChild(tile);
+        }
+      };
+
+      const updateWeatherDisplay = (payload, overrideLabel) => {
+        if (!payload || !payload.daily) return;
+
+        const daily = payload.daily;
+        const precipitationUnit = payload.unit_system?.precipitation_sum || 'mm';
+        const firstDay = {
+          date: daily.time?.[0],
+          tempMax: daily.temperature_max?.[0],
+          tempMean: daily.temperature_mean?.[0],
+          apparentMax: daily.apparent_temperature_max?.[0],
+          sunrise: daily.sunrise?.[0],
+          sunset: daily.sunset?.[0],
+          windspeed: daily.windspeed_max?.[0],
+          windDirection: daily.winddirection_dominant?.[0],
+          uvIndex: daily.uv_index_max?.[0],
+          precipitation: daily.precipitation_sum?.[0],
+        };
+
+        setText(
+          locationEl,
+          overrideLabel || payload.timezone?.replace(/_/g, ' ') || 'Local forecast'
+        );
+        setText(dateEl, formatDate(firstDay.date));
+        setText(tempEl, firstDay.tempMax != null ? `${Math.round(firstDay.tempMax)}°` : '—');
+        setText(feelsEl, firstDay.apparentMax != null ? `${Math.round(firstDay.apparentMax)}°` : '—');
+        setText(humidityEl, '—');
+        setText(
+          precipitationEl,
+          firstDay.precipitation != null
+            ? `${Math.round(firstDay.precipitation * 10) / 10} ${precipitationUnit}`
+            : '—'
+        );
+        setText(sunriseEl, formatTime(firstDay.sunrise));
+        setText(sunsetEl, formatTime(firstDay.sunset));
+        setText(windEl, formatWind(firstDay.windspeed, firstDay.windDirection));
+        setText(pressureEl, '—');
+        setText(uvEl, firstDay.uvIndex != null ? `${firstDay.uvIndex} UV` : '—');
+
+        renderDaily(payload);
+      };
+
+      const fetchWeather = (coords = currentCoords, label = coords.name) => {
+        const url = `${WEATHER_API}?lat=${coords.lat}&lon=${coords.lon}&days=7`;
+
+        setText(locationEl, label || 'Loading forecast…');
+        showFeedback('Loading weather data…');
+
+        fetch(url)
+          .then((resp) => {
+            if (!resp.ok) {
+              return resp.json().then((errorData) => {
+                throw new Error(errorData.message || errorData.error || `Weather API error: ${resp.status}`);
+              }).catch(() => {
+                throw new Error(`Weather API error: ${resp.status}`);
+              });
+            }
+            return resp.json();
+          })
+          .then((data) => {
+            updateWeatherDisplay(data, label);
+            showFeedback(`Showing weather for ${label}.`);
+          })
+          .catch((err) => {
+            console.error('Weather fetch error:', err);
+            setText(locationEl, 'Weather unavailable');
+            setText(dateEl, formatDate(new Date().toISOString().slice(0, 10)));
+            setText(tempEl, '—');
+            showFeedback(err.message || 'Unable to load weather data.', true);
+          });
+      };
+
+      const resolveQueryToCoords = (query) => {
+        const trimmed = query.trim();
+        if (!trimmed) {
+          return Promise.reject(new Error('Please enter a location.'));
+        }
+
+        const normalized = trimmed.toLowerCase();
+        if (FALLBACK_LOCATIONS[normalized]) {
+          return Promise.resolve(FALLBACK_LOCATIONS[normalized]);
+        }
+
+        const availableLocations = Object.keys(FALLBACK_LOCATIONS).join(', ');
+        return Promise.reject(
+          new Error(`Location not found. Try: ${availableLocations}`)
+        );
+      };
+
+      if (queryForm && queryInput) {
+        queryForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const queryValue = queryInput.value.trim();
+
+          if (!queryValue) {
+            showFeedback('Please enter a location.', true);
+            return;
+          }
+
+          showFeedback('Looking up location…');
+
+          resolveQueryToCoords(queryValue)
+            .then((coords) => {
+              currentCoords = { ...coords };
+              showFeedback(`Showing weather for ${coords.name || queryValue}.`);
+              fetchWeather(currentCoords, coords.name || queryValue);
+            })
+            .catch((err) => {
+              console.error('Location resolution error:', err);
+              showFeedback(err.message || 'Unable to find that location.', true);
+              queryInput.focus();
+            });
         });
       }
+
+      fetchWeather();
     })();
   </script>
 </div>
-
