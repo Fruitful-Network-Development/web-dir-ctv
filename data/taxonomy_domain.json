@@ -127,7 +127,7 @@
                         },
                         { "asparagaceae": "3_3_8_6_7_2", 
                           "topology": "family",
-                          "components": []
+                          "components": ["300 species"]
                         },
                         { "asphodelaceae": "3_3_8_6_7_3", 
                           "topology": "family",
@@ -496,7 +496,75 @@
                         },
                         { "Malvaceae": "3_3_8_8_22_5", 
                           "topology": "family", 
-                          "components": []
+                          "components": [
+                            { "fbelmoschus": "3_3_8_8_22_5_1", 
+                              "topology": "genus",
+                              "components": [
+                                { "angulosus": "3_3_8_8_22_5_1_1", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "caillei": "3_3_8_8_22_5_1_2", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "crinitus": "3_3_8_8_22_5_1_3", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "enbeepeegearensis": "3_3_8_8_22_5_1_4", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "esculentus": "3_3_8_8_22_5_1_5", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "ficulneus": "3_3_8_8_22_5_1_6", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "hostilis": "3_3_8_8_22_5_1_7", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "manihot": "3_3_8_8_22_5_1_8", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "moschatus": "3_3_8_8_22_5_1_9", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "muliensis": "3_3_8_8_22_5_1_10", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "odishae": "3_3_8_8_22_5_1_11", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "palianus": "3_3_8_8_22_5_1_12", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "rhodopetalus": "3_3_8_8_22_5_1_13", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "sagittifolius": "3_3_8_8_22_5_1_14", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "tuberculatus": "3_3_8_8_22_5_1_15", 
+                                  "topology": "species", 
+                                  "components": []
+                                }
+                              ]
+                            },
+                            ...
+                            "244 genuses"
+                          ]
                         },
                         { "Muntingiaceae": "3_3_8_8_22_6", 
                           "topology": "family", 
@@ -611,9 +679,83 @@
                         { "asteraceae": "3_3_8_8_31_3", 
                           "topology": "family", 
                           "components": [
-                            { "HERE": "3_3_8_8_31_3_1", 
+                            { "cynara": "3_3_8_8_31_3_1", 
                               "topology": "genus", 
-                              "components": []
+                              "components": [
+                                { "algarbiensis": "3_3_8_8_31_3_1_1", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "auranitica": "3_3_8_8_31_3_1_2", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "baetica": "3_3_8_8_31_3_1_3", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "cardunculus": "3_3_8_8_31_3_1_4", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "cornigera": "3_3_8_8_31_3_1_5", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "cyrenaica": "3_3_8_8_31_3_1_6", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "humilis": "3_3_8_8_31_3_1_7", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "makrisii": "3_3_8_8_31_3_1_8", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "syriaca": "3_3_8_8_31_3_1_9", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "tournefortii": "3_3_8_8_31_3_1_10", 
+                                  "topology": "species", 
+                                  "components": []
+                                }
+                              ]
+                            },
+                            { "cichorium": "3_3_8_8_31_3_2", 
+                              "topology": "genus", 
+                              "components": [
+                                { "bottae": "3_3_8_8_31_3_2_1", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "calvum": "3_3_8_8_31_3_2_2", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "endivia": "3_3_8_8_31_3_2_3", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "glandulosum": "3_3_8_8_31_3_2_4", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "intybus": "3_3_8_8_31_3_2_5", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "pumilum": "3_3_8_8_31_3_2_6", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "spinosum": "3_3_8_8_31_3_2_7", 
+                                  "topology": "species", 
+                                  "components": []
+                                }
+                              ]
                             },
                             ...
                             { "lactuca": "3_3_8_8_31_3_32000", 
@@ -680,9 +822,22 @@
                         { "apiaceae": "3_3_8_8_34_1", 
                           "topology": "family", 
                           "components": [
-                            { "HERE": "3_3_8_8_34_1_1", 
+                            { "foeniculum": "3_3_8_8_34_1_1", 
                               "topology": "genus", 
-                              "components": []
+                              "components": [
+                                { "scoparium": "3_3_8_8_34_1_1_1", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "subinodorum": "3_3_8_8_34_1_1_2", 
+                                  "topology": "species", 
+                                  "components": []
+                                },
+                                { "vulgare": "3_3_8_8_34_1_1_3", 
+                                  "topology": "species", 
+                                  "components": []
+                                }
+                              ]
                             },
                             ...
                             { "daucus": "3_3_8_8_34_1_434", 
