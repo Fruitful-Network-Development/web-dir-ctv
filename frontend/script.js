@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   const fetchWeather = (coords = currentCoords, label = coords.name) => {
-    const url = `/api/weather/daily?lat=${coords.lat}&lon=${coords.lon}&days=1`;
+    const url = `/api/weather?lat=${coords.lat}&lon=${coords.lon}&days=1`;
 
     setText(locationEl, label || 'Loading forecast…');
 
@@ -221,6 +221,8 @@ document.addEventListener('DOMContentLoaded', function() {
       .catch((err) => {
         console.error(err);
         setText(locationEl, 'Weather unavailable');
+        setText(tempEl, '—');
+        setText(dateEl, formatDate(new Date().toISOString().slice(0, 10)));
       });
   };
 
