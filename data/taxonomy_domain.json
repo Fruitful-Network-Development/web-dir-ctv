@@ -731,6 +731,11 @@
                                           "heritage": "modern", 
                                           "hybrid": "F1", 
                                         }
+                                        {"solanum_lycopersicum.cocktail_cultivar_kumato": "3_3_8_8_21_4_90_1_5_4", 
+                                          "topology": "cultivar", 
+                                          "heritage": "proprietary", 
+                                          "hybrid": "licensed_seed", 
+                                        }
                                       ]
                                     }
                                   ]
