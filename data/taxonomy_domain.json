@@ -610,15 +610,132 @@
                             { "solanum": "3_3_8_8_25_1_90", 
                               "topology": "genus", 
                               "components": [
-                                { "HERE": "3_3_8_8_21_4_90_1", 
+                                { "solanum_lycopersicum": "3_3_8_8_21_4_90_1", 
                                   "topology": "species", 
-                                  "components": []
+                                  "components": [
+                                    { "solanum_lycopersicum.plum_cultivar": "3_3_8_8_21_4_90_1_1", 
+                                      "topology": "cultivar_group", 
+                                      "components": [
+                                        { "solanum_lycopersicum.plum_cultivar_roma": "3_3_8_8_21_4_90_1_1_1", 
+                                          "topology": "cultivar", 
+                                          "heritage": "heirloom", 
+                                          "hybrid": "open_pollinated"
+                                        }, 
+                                        { "solanum_lycopersicum.plum_cultivar_san_marzano": "3_3_8_8_21_4_90_1_1_2", 
+                                          "topology": "cultivar", 
+                                          "heritage": "heirloom", 
+                                          "hybrid": "open_pollinated"
+                                        }, 
+                                        { "solanum_lycopersicum.plum_cultivar_roma_amish_paste": "3_3_8_8_21_4_90_1_1_3", 
+                                          "topology": "cultivar", 
+                                          "heritage": "heirloom", 
+                                          "hybrid": "open_pollinated"
+                                        }, 
+                                        { "solanum_lycopersicum.plum_cultivar_opalka": "3_3_8_8_21_4_90_1_1_4", 
+                                          "topology": "cultivar", 
+                                          "heritage": "heirloom", 
+                                          "hybrid": "open_pollinated"
+                                        }, 
+                                        { "solanum_lycopersicum.plum_cultivar_plum_regal": "3_3_8_8_21_4_90_1_1_5", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1"
+                                        }
+                                      ]
+                                    }, 
+                                    { "solanum_lycopersicum.cherry_cultivar": "3_3_8_8_21_4_90_1_2", 
+                                      "topology": "cultivar_group", 
+                                      "components": [
+                                        {"solanum_lycopersicum.cherry_cultivar_sun_gold": "3_3_8_8_21_4_90_1_2_1", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1"
+                                        }, 
+                                        {"solanum_lycopersicum.cherry_cultivar_black_cherry": "3_3_8_8_21_4_90_1_2_2", 
+                                          "topology": "cultivar", 
+                                          "heritage": "heirloom", 
+                                          "hybrid": "open_pollinated"
+                                        }, 
+                                        {"solanum_lycopersicum.cherry_cultivar_sweet_million": "3_3_8_8_21_4_90_1_2_3", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1", 
+                                        }, 
+                                        {"solanum_lycopersicum.cherry_cultivar_chadwick_cherry": "3_3_8_8_21_4_90_1_2_4", 
+                                          "topology": "cultivar", 
+                                          "heritage": "heirloom", 
+                                          "hybrid": "open_pollinated", 
+                                        }
+                                      ]
+                                    }, 
+                                    { "solanum_lycopersicum.grape_cultivar": "3_3_8_8_21_4_90_1_3", 
+                                      "topology": "cultivar_group", 
+                                      "components": [
+                                        {"solanum_lycopersicum.grape_cultivar_juliet": "3_3_8_8_21_4_90_1_3_1", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1", 
+                                        }, 
+                                        {"solanum_lycopersicum.grape_cultivar_santa": "3_3_8_8_21_4_90_1_3_2", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1", 
+                                        }
+                                      ]
+                                    }, 
+                                    { "solanum_lycopersicum.beefsteak_cultivar": "3_3_8_8_21_4_90_1_4", 
+                                      "topology": "cultivar_group", 
+                                      "components": [
+                                        {"solanum_lycopersicum.beefsteak_cultivar_brandywine": "3_3_8_8_21_4_90_1_4_1", 
+                                          "topology": "cultivar", 
+                                          "heritage": "heirloom", 
+                                          "hybrid": "open_pollinated", 
+                                        }, 
+                                        {"solanum_lycopersicum.beefsteak_cultivar_mortgage_lifter": "3_3_8_8_21_4_90_1_4_2", 
+                                          "topology": "cultivar", 
+                                          "heritage": "heirloom", 
+                                          "hybrid": "open_pollinated", 
+                                        }, 
+                                        {"solanum_lycopersicum.beefsteak_cultivar_big_boy": "3_3_8_8_21_4_90_1_4_3", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1", 
+                                        }, 
+                                        {"solanum_lycopersicum.beefsteak_cultivar_beefmaster": "3_3_8_8_21_4_90_1_4_4", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1", 
+                                        }, 
+                                        {"solanum_lycopersicum.beefsteak_cultivar_cherokee_purple": "3_3_8_8_21_4_90_1_4_5", 
+                                          "topology": "cultivar", 
+                                          "heritage": "heirloom", 
+                                          "hybrid": "open_pollinated", 
+                                        }
+                                      ]
+                                    }, 
+                                    { "solanum_lycopersicum.cocktail_cultivar": "3_3_8_8_21_4_90_1_5", 
+                                      "topology": "cultivar_group", 
+                                      "components": [
+                                        {"solanum_lycopersicum.cocktail_cultivar_campari": "3_3_8_8_21_4_90_1_5_1", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1", 
+                                        }, 
+                                        {"solanum_lycopersicum.cocktail_cultivar_mountain_magic": "3_3_8_8_21_4_90_1_5_2", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1", 
+                                        }, 
+                                        {"solanum_lycopersicum.cocktail_cultivar_cocktail_crush": "3_3_8_8_21_4_90_1_5_3", 
+                                          "topology": "cultivar", 
+                                          "heritage": "modern", 
+                                          "hybrid": "F1", 
+                                        }
+                                      ]
+                                    }
+                                  ]
                                 },
                                 ...
-                                { "solanum_lycopersicum": "3_3_8_8_21_4_90_1239", 
-                                  "topology": "species", 
-                                  "components": []
-                                },
                                 { "solanum_tuberosum": "3_3_8_8_25_1_90_1240", 
                                   "topology": "species", 
                                   "components": []
